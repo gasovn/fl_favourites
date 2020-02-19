@@ -1,0 +1,30 @@
+{
+  "name": "fallen-london-favourites",
+  "version": "0.4.1",
+  "description": "Fork of an unofficial Fallen London extension to quickly choose favourite branches",
+  "main": "src/js/content.js",
+  "scripts": {
+    "lint": "eslint -c .eslintrc.js ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gasovn/fl_favourites.git"
+  },
+  "keywords": [
+    "fallenlondon"
+  ],
+  "author": "Alexander Kashev",
+  "contributors": [
+    "Nikita Gasov <gasov.nv@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gasovn/fl_favourites/issues"
+  },
+  "homepage": "https://github.com/gasovn/fl_favourites#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}

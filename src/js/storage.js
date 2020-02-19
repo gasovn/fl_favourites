@@ -2,29 +2,29 @@
 
 const MAX_MAP_ITEMS_PER_KEY = 512;
 
-Set.prototype.pack = function(storage_key) {
-  let source = Array.from(this).sort();
-  let total = source.length;
-  let keys = [];
-  let result = {};
-  
+Set.prototype.pack = function(storageKey) {
+  const source = Array.from(this).sort();
+  const total = source.length;
+  const keys = [];
+  const result = {};
+
   for (let index = 0; index * MAX_MAP_ITEMS_PER_KEY < total; index++) {
-    result[`${storage_key}_${index}`] = source.slice(
+    result[`${storageKey}_${index}`] = source.slice(
       index * MAX_MAP_ITEMS_PER_KEY,
-      (index + 1) * MAX_MAP_ITEMS_PER_KEY
+      (index + 1) * MAX_MAP_ITEMS_PER_KEY,
     );
-    keys.push(`${storage_key}_${index}`);
+    keys.push(`${storageKey}_${index}`);
   }
 
-  result[`${storage_key}_keys`] = keys;
+  result[`${storageKey}_keys`] = keys;
   return result;
 };
 
-function unpackSet(data, storage_key) {
+function unpackSet(data, storageKey) {
   let result = new Set();
-  if (Array.isArray(data[`${storage_key}_keys`])) {
-    for (var key of data[`${storage_key}_keys`]) {
-       result = new Set([...result, ...data[key]]);
+  if (Array.isArray(data[`${storageKey}_keys`])) {
+    for (const key of data[`${storageKey}_keys`]) {
+      result = new Set([...result, ...data[key]]);
     }
   }
   return result;
@@ -32,9 +32,9 @@ function unpackSet(data, storage_key) {
 
 // Storage interfaces
 
-var default_options = {
-  branch_reorder_mode: "branch_reorder_active",
-  switch_mode: "click_through",
+const defaultOptions = {
+  branch_reorder_mode: 'branch_reorder_active',
+  switch_mode: 'click_through',
 
   branch_faves_keys: [],
   branch_avoids_keys: [],
@@ -43,19 +43,19 @@ var default_options = {
   card_protects_keys: [],
   card_discards_keys: [],
 
-  storage_schema: 2
+  storage_schema: 2,
 };
 
 function getOption(key) {
   return new Promise((resolve, reject) => {
-    if (key in default_options) {
-      chrome.storage.local.get({[key]: default_options[key]}, (data) => {
+    if (key in defaultOptions) {
+      chrome.storage.local.get({[key]: defaultOptions[key]}, (data) => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
         } else {
           resolve(data[key]);
         }
-      })
+      });
     } else {
       chrome.storage.local.get(key, (data) => {
         if (chrome.runtime.lastError) {
@@ -63,7 +63,7 @@ function getOption(key) {
         } else {
           resolve(data[key]);
         }
-      })
+      });
     }
   });
 }
@@ -76,26 +76,26 @@ function setOption(key, value) {
       } else {
         resolve();
       }
-    })
+    });
   });
 }
 
 function getOptions() {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.get(null, (all_data) => {
+    chrome.storage.local.get(null, (allAata) => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {
-        chrome.storage.local.get(default_options, function(data_overlay) {
+        chrome.storage.local.get(defaultOptions, function(dataOverlay) {
           if (chrome.runtime.lastError) {
             reject(chrome.runtime.lastError);
           } else {
-            Object.assign(all_data, data_overlay);
-            resolve(all_data);
+            Object.assign(allAata, dataOverlay);
+            resolve(allAata);
           }
         });
       }
-    })
+    });
   });
 }
 
@@ -107,6 +107,6 @@ function setOptions(data) {
       } else {
         resolve();
       }
-    })
+    });
   });
 }
