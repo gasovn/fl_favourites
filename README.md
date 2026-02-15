@@ -1,4 +1,7 @@
-# Playing Favourites for Fallen London 
+> **This project has moved to [fallen-london-favourites](https://github.com/gasovn/fallen-london-favourites).**
+> This repository is no longer maintained.
+
+# Playing Favourites for Fallen London
 
 Forked from [kav2k](https://github.com/kav2k/fl_favourites)
 
